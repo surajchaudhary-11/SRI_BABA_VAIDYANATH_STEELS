@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steel Weight & Cost Calculator | Bababaisnath Steels Kanpur</title>
+  <meta name="description" content="Use steel weight calculator, TMT requirement estimator, cost estimator, cut calculator and weight-to-pieces tool by Bababaisnath Steels.">
+  <meta property="og:title" content="Steel Calculators - Bababaisnath Steels">
+  <meta property="og:description" content="Practical engineering calculators for contractors and steel buyers in Kanpur.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/calculator.html">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#0F2557',accent:'#E8880A',success:'#16A34A',page:'#F8F8F6'}}}};</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-page">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 text-primary font-bold text-xl"><span class="text-accent">[#]</span>Bababaisnath Steels</a>
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html" class="text-accent">Calculators</a><a href="quote.html">Quote</a><a href="tracking.html">Track Order</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+      <div class="hidden lg:flex gap-2"><a href="https://wa.me/919876543210" class="px-4 py-2 rounded bg-success text-white text-sm font-semibold">WhatsApp</a><a href="tel:+919876543210" class="px-4 py-2 rounded border border-primary text-primary text-sm font-semibold">Call Now</a></div>
+      <button id="menuBtn" class="lg:hidden text-sm text-primary border px-3 py-1 rounded">Menu</button>
+    </div>
+    <aside id="mobileMenu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl translate-x-full transition-transform duration-300 z-50 p-6 lg:hidden"><button id="closeMenu" class="mb-6 text-primary text-xl">X</button><div class="grid gap-4 font-semibold"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculators</a><a href="quote.html">Quote</a><a href="tracking.html">Track Order</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="blog.html">Blog</a></div></aside>
+  </header>
+
+  <section class="industrial-hero text-white">
+    <div class="max-w-7xl mx-auto px-4 py-14">
+      <h1 class="text-4xl font-extrabold reveal">Steel Tools & Calculators</h1>
+      <p class="mt-3 reveal">Accurate calculators for site planning, procurement and budgeting decisions.</p>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 py-10">
+    <div class="flex flex-wrap gap-2 mb-6">
+      <button class="tabBtn px-4 py-2 rounded bg-primary text-white" data-tab="weight">Weight Calculator</button>
+      <button class="tabBtn px-4 py-2 rounded border border-primary" data-tab="tmt">TMT Requirement</button>
+      <button class="tabBtn px-4 py-2 rounded border border-primary" data-tab="cost">Cost Estimator</button>
+      <button class="tabBtn px-4 py-2 rounded border border-primary" data-tab="cut">Cut & Piece</button>
+      <button class="tabBtn px-4 py-2 rounded border border-primary" data-tab="pieces">Weight to Pieces</button>
+    </div>
+
+    <section id="weight" class="tool card p-6">
+      <h2 class="text-2xl font-bold text-primary">Weight Calculator</h2>
+      <div class="grid md:grid-cols-3 gap-4 mt-4">
+        <select id="sectionType" class="border rounded px-3 py-3"><option>TMT Bar</option><option>MS Pipe</option><option>HR Sheet</option><option>MS Plate</option><option>Equal Angle</option><option>Channel</option><option>I-Beam</option></select>
+        <input id="len" class="border rounded px-3 py-3" type="number" placeholder="Length (m)" value="12">
+        <input id="qty" class="border rounded px-3 py-3" type="number" placeholder="Quantity (pcs)" value="1">
+        <input id="d1" class="border rounded px-3 py-3" type="number" placeholder="Diameter/Width (mm)">
+        <input id="d2" class="border rounded px-3 py-3" type="number" placeholder="Thickness/Height (mm)">
+        <input id="d3" class="border rounded px-3 py-3" type="number" placeholder="Extra dim (mm)">
+      </div>
+      <p class="mt-4 text-sm text-slate-600">Use dimensions as: TMT(d1=dia), MS Pipe(d1=OD,d2=ID), HR/MS Plate(d1=width,d2=thickness), Equal Angle(d1=leg1,d2=leg2,d3=thickness), Channel(d1=depth,d2=flange,d3=thickness), I-Beam(d1=depth,d2=flange,d3=web thickness; flange thickness assumed as 0.6*d3).</p>
+      <div class="mt-4 p-4 bg-slate-100 rounded">
+        <p>Weight per piece: <b id="wpp">0 kg</b></p>
+        <p>Total weight: <b id="wtotal">0 kg</b></p>
+      </div>
+      <button onclick="waShare('weight')" class="mt-4 px-4 py-2 rounded bg-success text-white font-semibold">WhatsApp this result</button>
+    </section>
+
+    <section id="tmt" class="tool card p-6 hidden">
+      <h2 class="text-2xl font-bold text-primary">TMT Requirement Calculator</h2>
+      <div class="grid md:grid-cols-3 gap-4 mt-4">
+        <input id="sl" type="number" class="border rounded px-3 py-3" placeholder="Slab length (m)" value="10">
+        <input id="sw" type="number" class="border rounded px-3 py-3" placeholder="Slab width (m)" value="8">
+        <input id="sd" type="number" class="border rounded px-3 py-3" placeholder="Slab depth (m)" value="0.12">
+        <input id="cc" type="number" class="border rounded px-3 py-3" placeholder="No. of columns" value="10">
+        <input id="ch" type="number" class="border rounded px-3 py-3" placeholder="Column height (m)" value="3">
+        <input id="csize" type="number" class="border rounded px-3 py-3" placeholder="Column size (m x m)" value="0.3">
+      </div>
+      <div class="mt-4 p-4 bg-slate-100 rounded">
+        <p>Total TMT required: <b id="tmtKg">0 kg</b></p>
+        <p>Total in MT: <b id="tmtMt">0 MT</b></p>
+      </div>
+      <button onclick="waShare('tmt')" class="mt-4 px-4 py-2 rounded bg-success text-white font-semibold">WhatsApp this result</button>
+    </section>
+
+    <section id="cost" class="tool card p-6 hidden">
+      <h2 class="text-2xl font-bold text-primary">Cost Estimator</h2>
+      <div class="grid md:grid-cols-2 gap-4 mt-4">
+        <input id="cmt" type="number" class="border rounded px-3 py-3" placeholder="Weight (MT)" value="10">
+        <input id="rate" type="number" class="border rounded px-3 py-3" placeholder="Rate per MT (INR)" value="56000">
+      </div>
+      <div class="mt-4 p-4 bg-slate-100 rounded">
+        <p>Base Cost: <b id="baseCost">₹0</b></p>
+        <p>GST @18%: <b id="gstCost">₹0</b></p>
+        <p>Total Cost: <b id="totalCost">₹0</b></p>
+      </div>
+      <button onclick="waShare('cost')" class="mt-4 px-4 py-2 rounded bg-success text-white font-semibold">WhatsApp this result</button>
+    </section>
+
+    <section id="cut" class="tool card p-6 hidden">
+      <h2 class="text-2xl font-bold text-primary">Cut & Piece Calculator</h2>
+      <div class="grid md:grid-cols-2 gap-4 mt-4">
+        <input id="stdLen" type="number" class="border rounded px-3 py-3" placeholder="Standard length (m)" value="12">
+        <input id="cutLen" type="number" class="border rounded px-3 py-3" placeholder="Cut length (m)" value="2.5">
+      </div>
+      <div class="mt-4 p-4 bg-slate-100 rounded">
+        <p>Pieces per bar: <b id="piecesPerBar">0</b></p>
+        <p>Wastage: <b id="wastePercent">0%</b></p>
+      </div>
+      <button onclick="waShare('cut')" class="mt-4 px-4 py-2 rounded bg-success text-white font-semibold">WhatsApp this result</button>
+    </section>
+
+    <section id="pieces" class="tool card p-6 hidden">
+      <h2 class="text-2xl font-bold text-primary">Weight to Pieces</h2>
+      <div class="grid md:grid-cols-3 gap-4 mt-4">
+        <input id="reqMt" type="number" class="border rounded px-3 py-3" placeholder="Required weight (MT)" value="3">
+        <input id="dia" type="number" class="border rounded px-3 py-3" placeholder="TMT Dia (mm)" value="16">
+        <input id="barLen" type="number" class="border rounded px-3 py-3" placeholder="Bar length (m)" value="12">
+      </div>
+      <div class="mt-4 p-4 bg-slate-100 rounded">
+        <p>Weight per piece: <b id="pieceWt">0 kg</b></p>
+        <p>No. of pieces: <b id="pieceCount">0</b></p>
+        <p>Approx bundles (10 pcs): <b id="bundleCount">0</b></p>
+      </div>
+      <button onclick="waShare('pieces')" class="mt-4 px-4 py-2 rounded bg-success text-white font-semibold">WhatsApp this result</button>
+    </section>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-200 mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8 text-sm">
+      <div><h3 class="font-bold text-white text-lg">Bababaisnath Steels</h3><p class="mt-2">Kanpur's B2B steel distribution partner.</p><p class="mt-2">GST: 09ABCDE1234F1Z8<br>MSME: UDYAM-UP-40-0012345</p></div>
+      <div><h3 class="font-bold text-white">Quick Links</h3><div class="grid gap-1 mt-2"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculators</a><a href="quote.html">Get Quote</a><a href="tracking.html">Track Order</a></div></div>
+      <div><h3 class="font-bold text-white">Categories</h3><p class="mt-2">TMT Bars, Pipes, Sheets, Plates, Angles, Channels, I-Beams.</p></div>
+      <div><h3 class="font-bold text-white">Contact</h3><p class="mt-2">Transport Nagar, Kanpur, UP<br>+91 98765 43210<br>sales@bababaisnathsteels.in</p></div>
+    </div>
+    <div class="border-t border-slate-700 py-3 text-center text-xs">(c) 2026 Bababaisnath Steels. Proudly serving Kanpur since 2004.</div>
+  </footer>
+
+  <a href="https://wa.me/919876543210" class="fixed bottom-24 right-4 z-40 bg-success text-white px-4 py-3 rounded-full whatsapp-pulse font-semibold">WhatsApp</a>
+  <button id="topBtn" class="fixed bottom-24 right-36 z-40 bg-primary text-white px-4 py-3 rounded-full hidden">Top</button>
+  <a href="quote.html" class="fixed bottom-24 left-4 z-40 bg-accent text-primary px-4 py-3 rounded-full font-bold">Enquiry Cart: <span id="cartCount">0</span></a>
+  <nav class="lg:hidden fixed bottom-0 inset-x-0 bg-white border-t grid grid-cols-5 text-xs font-semibold z-50"><a href="index.html" class="p-2 text-center">Home</a><a href="products.html" class="p-2 text-center">Products</a><a href="calculator.html" class="p-2 text-center">Calculator</a><a href="quote.html" class="p-2 text-center">Quote</a><a href="tel:+919876543210" class="p-2 text-center">Call</a></nav>
+
+  <script>
+    if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("sw.js")); }
+    const DENSITY = 7850;
+    const tabs = document.querySelectorAll(".tabBtn"), tools = document.querySelectorAll(".tool");
+    tabs.forEach(btn => btn.addEventListener("click", () => {
+      tabs.forEach(b => b.className = "tabBtn px-4 py-2 rounded border border-primary");
+      btn.className = "tabBtn px-4 py-2 rounded bg-primary text-white";
+      tools.forEach(t => t.classList.add("hidden"));
+      document.getElementById(btn.dataset.tab).classList.remove("hidden");
+    }));
+    function n(id){ return Number(document.getElementById(id).value || 0); }
+    function kgFromArea(areaMM2, lenM){ return areaMM2 * lenM * 0.00785; }
+    function calcWeight(){
+      const s = document.getElementById("sectionType").value, len = n("len"), qty = n("qty"), d1 = n("d1"), d2 = n("d2"), d3 = n("d3");
+      let per = 0;
+      if (s === "TMT Bar") per = (d1 * d1 / 162) * len;
+      if (s === "MS Pipe") per = ((Math.PI/4) * (d1*d1 - d2*d2) * 1e-6) * len * DENSITY;
+      if (s === "HR Sheet" || s === "MS Plate") per = (d1/1000) * (len) * (d2/1000) * DENSITY;
+      if (s === "Equal Angle") per = kgFromArea((d1 + d2 - d3) * d3, len);
+      if (s === "Channel") { const area = 2 * d2 * d3 + (d1 - 2*d3) * d3; per = kgFromArea(area, len); }
+      if (s === "I-Beam") { const tf = d3 * 0.6, area = 2 * d2 * tf + (d1 - 2*tf) * d3; per = kgFromArea(area, len); }
+      const total = per * qty;
+      document.getElementById("wpp").textContent = per.toFixed(2) + " kg";
+      document.getElementById("wtotal").textContent = total.toFixed(2) + " kg";
+    }
+    ["sectionType","len","qty","d1","d2","d3"].forEach(id => document.getElementById(id).addEventListener("input", calcWeight));
+    function calcTmt(){
+      const slabVol = n("sl") * n("sw") * n("sd");
+      const colVol = n("cc") * n("ch") * n("csize") * n("csize");
+      const slabSteel = slabVol * 0.01 * DENSITY;
+      const colSteel = colVol * 0.02 * DENSITY;
+      const total = slabSteel + colSteel;
+      document.getElementById("tmtKg").textContent = total.toFixed(1) + " kg";
+      document.getElementById("tmtMt").textContent = (total/1000).toFixed(3) + " MT";
+    }
+    ["sl","sw","sd","cc","ch","csize"].forEach(id => document.getElementById(id).addEventListener("input", calcTmt));
+    function calcCost(){
+      const base = n("cmt") * n("rate"), gst = base * 0.18, total = base + gst;
+      document.getElementById("baseCost").textContent = "₹" + base.toLocaleString("en-IN");
+      document.getElementById("gstCost").textContent = "₹" + gst.toLocaleString("en-IN");
+      document.getElementById("totalCost").textContent = "₹" + total.toLocaleString("en-IN");
+    }
+    ["cmt","rate"].forEach(id => document.getElementById(id).addEventListener("input", calcCost));
+    function calcCut(){
+      const s = n("stdLen"), c = n("cutLen"), pcs = c ? Math.floor(s/c) : 0, waste = s ? ((s - pcs*c) / s) * 100 : 0;
+      document.getElementById("piecesPerBar").textContent = pcs;
+      document.getElementById("wastePercent").textContent = waste.toFixed(2) + "%";
+    }
+    ["stdLen","cutLen"].forEach(id => document.getElementById(id).addEventListener("input", calcCut));
+    function calcPieces(){
+      const wtPerPiece = (n("dia")*n("dia")/162) * n("barLen");
+      const pieces = wtPerPiece ? (n("reqMt")*1000 / wtPerPiece) : 0;
+      document.getElementById("pieceWt").textContent = wtPerPiece.toFixed(2) + " kg";
+      document.getElementById("pieceCount").textContent = Math.ceil(pieces);
+      document.getElementById("bundleCount").textContent = Math.ceil(pieces/10);
+    }
+    ["reqMt","dia","barLen"].forEach(id => document.getElementById(id).addEventListener("input", calcPieces));
+    function waShare(type){
+      const messages = {
+        weight: `Weight Calculator Result:%0A${document.getElementById("wpp").textContent} per piece%0A${document.getElementById("wtotal").textContent} total`,
+        tmt: `TMT Requirement:%0A${document.getElementById("tmtKg").textContent}%0A${document.getElementById("tmtMt").textContent}`,
+        cost: `Cost Estimate:%0A${document.getElementById("baseCost").textContent} base%0A${document.getElementById("gstCost").textContent} GST%0A${document.getElementById("totalCost").textContent} total`,
+        cut: `Cut & Piece Result:%0A${document.getElementById("piecesPerBar").textContent} pcs/bar%0A${document.getElementById("wastePercent").textContent} wastage`,
+        pieces: `Weight to Pieces:%0A${document.getElementById("pieceWt").textContent} per piece%0A${document.getElementById("pieceCount").textContent} pieces`
+      };
+      window.open(`https://wa.me/919876543210?text=${messages[type]}`, "_blank");
+    }
+    window.waShare = waShare;
+    calcWeight(); calcTmt(); calcCost(); calcCut(); calcPieces();
+    const menuBtn = document.getElementById("menuBtn"), closeMenu = document.getElementById("closeMenu"), mobileMenu = document.getElementById("mobileMenu");
+    menuBtn?.addEventListener("click", () => mobileMenu.classList.remove("translate-x-full"));
+    closeMenu?.addEventListener("click", () => mobileMenu.classList.add("translate-x-full"));
+    const topBtn = document.getElementById("topBtn");
+    window.addEventListener("scroll", () => topBtn.classList.toggle("hidden", window.scrollY < 350));
+    topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    const observer = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("show")), { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    document.getElementById("cartCount").textContent = JSON.parse(localStorage.getItem("bbsEnquiryCart") || "[]").length;
+  </script>
+</body>
+</html>

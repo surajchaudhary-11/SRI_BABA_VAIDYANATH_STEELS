@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steel Product Catalogue in Kanpur | Bababaisnath Steels</title>
+  <meta name="description" content="Browse TMT bars, MS pipes, GI pipes, sheets, plates, channels, beams and structural steel in stock at Bababaisnath Steels Kanpur.">
+  <meta property="og:title" content="Bababaisnath Steels Product Catalogue">
+  <meta property="og:description" content="Filter steel products by category, grade, and brand for bulk procurement in Kanpur.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/products.html">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#0F2557',accent:'#E8880A',success:'#16A34A',page:'#F8F8F6'}}}};</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-page">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 text-primary font-bold text-xl"><span class="text-accent">[#]</span>Bababaisnath Steels</a>
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold">
+        <a href="index.html">Home</a><a href="products.html" class="text-accent">Products</a><a href="calculator.html">Calculators</a><a href="quote.html">Quote</a><a href="tracking.html">Track Order</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="hidden lg:flex gap-2"><a href="https://wa.me/919876543210" class="px-4 py-2 rounded bg-success text-white text-sm font-semibold">WhatsApp</a><a href="tel:+919876543210" class="px-4 py-2 rounded border border-primary text-primary text-sm font-semibold">Call Now</a></div>
+      <button id="menuBtn" class="lg:hidden text-sm text-primary border px-3 py-1 rounded">Menu</button>
+    </div>
+    <aside id="mobileMenu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl translate-x-full transition-transform duration-300 z-50 p-6 lg:hidden">
+      <button id="closeMenu" class="mb-6 text-primary text-xl">X</button>
+      <div class="grid gap-4 font-semibold"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculators</a><a href="quote.html">Quote</a><a href="tracking.html">Track Order</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="blog.html">Blog</a></div>
+    </aside>
+  </header>
+
+  <section class="industrial-hero text-white">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+      <h1 class="text-4xl lg:text-5xl font-extrabold reveal">Steel Product Catalogue</h1>
+      <p class="mt-3 max-w-2xl reveal">Filter by category, grade, and brand. Add required items to enquiry cart and request current market pricing instantly.</p>
+      <input id="searchInput" type="text" placeholder="Search by product, grade, or IS standard..." class="mt-6 w-full lg:w-2/3 px-4 py-3 rounded text-slate-900" />
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 py-10 grid lg:grid-cols-[280px_1fr] gap-6">
+    <aside class="card p-5 h-fit">
+      <h2 class="text-xl font-bold text-primary">Filters</h2>
+      <div class="mt-4">
+        <h3 class="font-semibold">Category</h3>
+        <select id="catFilter" class="mt-2 w-full border rounded px-3 py-2">
+          <option value="">All</option><option>TMT Bars</option><option>MS Pipes</option><option>GI Pipes</option><option>HR Sheets</option><option>CR Sheets</option><option>MS Plates</option><option>Angles</option><option>Channels</option><option>I-Beams</option><option>Flat Bars</option><option>Binding Wire</option><option>Roofing Sheets</option>
+        </select>
+      </div>
+      <div class="mt-4">
+        <h3 class="font-semibold">Grade</h3>
+        <select id="gradeFilter" class="mt-2 w-full border rounded px-3 py-2">
+          <option value="">All</option><option>Fe500D</option><option>Fe550D</option><option>IS 2062 E250</option><option>IS 1079</option><option>IS 277</option><option>A106</option><option>YST210</option>
+        </select>
+      </div>
+      <div class="mt-4">
+        <h3 class="font-semibold">Brand</h3>
+        <select id="brandFilter" class="mt-2 w-full border rounded px-3 py-2">
+          <option value="">All</option><option>TATA Steel</option><option>JSW Steel</option><option>SAIL</option><option>Jindal Steel</option><option>RINL</option><option>Shyam Steel</option>
+        </select>
+      </div>
+    </aside>
+
+    <section>
+      <div id="skeletonGrid" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+      <div id="productGrid" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 hidden"></div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-200 mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8 text-sm">
+      <div><h3 class="font-bold text-white text-lg">Bababaisnath Steels</h3><p class="mt-2">Kanpur's B2B steel distribution partner.</p><p class="mt-2">GST: 09ABCDE1234F1Z8<br>MSME: UDYAM-UP-40-0012345</p></div>
+      <div><h3 class="font-bold text-white">Quick Links</h3><div class="grid gap-1 mt-2"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculators</a><a href="quote.html">Get Quote</a><a href="tracking.html">Track Order</a></div></div>
+      <div><h3 class="font-bold text-white">Categories</h3><p class="mt-2">TMT Bars, Pipes, Sheets, Plates, Angles, Channels, I-Beams.</p></div>
+      <div><h3 class="font-bold text-white">Contact</h3><p class="mt-2">Transport Nagar, Kanpur, UP<br>+91 98765 43210<br>sales@bababaisnathsteels.in</p></div>
+    </div>
+    <div class="border-t border-slate-700 py-3 text-center text-xs">(c) 2026 Bababaisnath Steels. Proudly serving Kanpur since 2004.</div>
+  </footer>
+
+  <a href="https://wa.me/919876543210" class="fixed bottom-24 right-4 z-40 bg-success text-white px-4 py-3 rounded-full whatsapp-pulse font-semibold">WhatsApp</a>
+  <button id="topBtn" class="fixed bottom-24 right-36 z-40 bg-primary text-white px-4 py-3 rounded-full hidden">Top</button>
+  <a id="enquiry" href="quote.html" class="fixed bottom-24 left-4 z-40 bg-accent text-primary px-4 py-3 rounded-full font-bold">Enquiry Cart: <span id="cartCount">0</span></a>
+  <nav class="lg:hidden fixed bottom-0 inset-x-0 bg-white border-t grid grid-cols-5 text-xs font-semibold z-50"><a href="index.html" class="p-2 text-center">Home</a><a href="products.html" class="p-2 text-center">Products</a><a href="calculator.html" class="p-2 text-center">Calculator</a><a href="quote.html" class="p-2 text-center">Quote</a><a href="tel:+919876543210" class="p-2 text-center">Call</a></nav>
+
+  <script>
+    if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("sw.js")); }
+    const products = [
+      {name:"TMT Bars",cat:"TMT Bars",grade:"Fe500D",size:"8-32 mm",is:"IS 1786",stock:"In Stock",brand:"TATA Steel"},
+      {name:"TMT Bars Premium",cat:"TMT Bars",grade:"Fe550D",size:"10-25 mm",is:"IS 1786",stock:"Limited",brand:"JSW Steel"},
+      {name:"MS Pipes",cat:"MS Pipes",grade:"YST210",size:"15-150 NB",is:"IS 1239",stock:"In Stock",brand:"Jindal Steel"},
+      {name:"GI Pipes",cat:"GI Pipes",grade:"A106",size:"15-100 NB",is:"IS 1239",stock:"On Order",brand:"SAIL"},
+      {name:"HR Sheets",cat:"HR Sheets",grade:"IS 2062 E250",size:"1.6-25 mm",is:"IS 2062",stock:"In Stock",brand:"RINL"},
+      {name:"CR Sheets",cat:"CR Sheets",grade:"IS 1079",size:"0.5-3 mm",is:"IS 1079",stock:"Limited",brand:"TATA Steel"},
+      {name:"MS Plates",cat:"MS Plates",grade:"IS 2062 E250",size:"6-80 mm",is:"IS 2062",stock:"In Stock",brand:"JSW Steel"},
+      {name:"Equal Angles",cat:"Angles",grade:"IS 2062 E250",size:"25x25 to 100x100",is:"IS 808",stock:"In Stock",brand:"SAIL"},
+      {name:"Channels",cat:"Channels",grade:"IS 2062 E250",size:"75-300 mm",is:"IS 808",stock:"Limited",brand:"RINL"},
+      {name:"I-Beams",cat:"I-Beams",grade:"IS 2062 E250",size:"100-600 mm",is:"IS 808",stock:"On Order",brand:"Jindal Steel"},
+      {name:"Flat Bars",cat:"Flat Bars",grade:"IS 2062 E250",size:"25x3 to 150x12",is:"IS 1730",stock:"In Stock",brand:"Shyam Steel"},
+      {name:"Binding Wire",cat:"Binding Wire",grade:"Mild Steel",size:"18-22 gauge",is:"IS 280",stock:"In Stock",brand:"TATA Steel"},
+      {name:"Roofing Sheets",cat:"Roofing Sheets",grade:"IS 277",size:"0.3-0.6 mm",is:"IS 277",stock:"Limited",brand:"JSW Steel"}
+    ];
+    const searchInput = document.getElementById("searchInput"), catFilter = document.getElementById("catFilter"), gradeFilter = document.getElementById("gradeFilter"), brandFilter = document.getElementById("brandFilter"), productGrid = document.getElementById("productGrid"), skeletonGrid = document.getElementById("skeletonGrid");
+    for (let i = 0; i < 9; i++) { skeletonGrid.innerHTML += '<div class="card p-4"><div class="skeleton h-40 rounded"></div><div class="skeleton h-4 mt-4 rounded"></div><div class="skeleton h-4 mt-2 rounded"></div></div>'; }
+    function badge(stock){ return stock==="In Stock"?"bg-green-100 text-green-800":stock==="Limited"?"bg-amber-100 text-amber-800":"bg-slate-100 text-slate-700"; }
+    function render() {
+      const term = searchInput.value.toLowerCase();
+      const filtered = products.filter(p =>
+        (!catFilter.value || p.cat === catFilter.value) &&
+        (!gradeFilter.value || p.grade === gradeFilter.value) &&
+        (!brandFilter.value || p.brand === brandFilter.value) &&
+        (p.name + p.grade + p.is + p.brand).toLowerCase().includes(term)
+      );
+      productGrid.innerHTML = filtered.map((p, i) => `
+        <article class="card p-4 reveal">
+          <div class="h-36 rounded bg-slate-100 grid place-items-center text-5xl text-primary" aria-label="${p.name} image">[#]</div>
+          <h3 class="text-xl font-bold mt-3 text-primary">${p.name}</h3>
+          <p class="text-sm mt-1"><b>Grade:</b> ${p.grade}</p>
+          <p class="text-sm"><b>Size:</b> ${p.size}</p>
+          <p class="text-sm"><b>IS:</b> ${p.is}</p>
+          <span class="inline-block mt-2 px-2 py-1 rounded text-xs font-semibold ${badge(p.stock)}">${p.stock}</span>
+          <div class="mt-4 flex gap-2">
+            <button onclick="addToEnquiry(${i})" class="flex-1 px-3 py-2 rounded bg-accent text-primary font-semibold">Add to Enquiry</button>
+            <a href="quote.html" class="flex-1 px-3 py-2 rounded border border-primary text-primary text-center font-semibold">Get Price</a>
+          </div>
+        </article>`).join("");
+      if (!filtered.length) productGrid.innerHTML = '<p class="col-span-full card p-6">No matching products found.</p>';
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    }
+    function addToEnquiry(index) {
+      const mapFiltered = products.filter(p =>
+        (!catFilter.value || p.cat === catFilter.value) &&
+        (!gradeFilter.value || p.grade === gradeFilter.value) &&
+        (!brandFilter.value || p.brand === brandFilter.value) &&
+        (p.name + p.grade + p.is + p.brand).toLowerCase().includes(searchInput.value.toLowerCase())
+      );
+      const selected = mapFiltered[index];
+      const cart = JSON.parse(localStorage.getItem("bbsEnquiryCart") || "[]");
+      cart.push(selected);
+      localStorage.setItem("bbsEnquiryCart", JSON.stringify(cart));
+      document.getElementById("cartCount").textContent = cart.length;
+    }
+    setTimeout(() => { skeletonGrid.classList.add("hidden"); productGrid.classList.remove("hidden"); render(); }, 700);
+    [searchInput, catFilter, gradeFilter, brandFilter].forEach(el => el.addEventListener("input", render));
+    window.addToEnquiry = addToEnquiry;
+    const menuBtn = document.getElementById("menuBtn"), closeMenu = document.getElementById("closeMenu"), mobileMenu = document.getElementById("mobileMenu");
+    menuBtn?.addEventListener("click", () => mobileMenu.classList.remove("translate-x-full"));
+    closeMenu?.addEventListener("click", () => mobileMenu.classList.add("translate-x-full"));
+    const topBtn = document.getElementById("topBtn");
+    window.addEventListener("scroll", () => topBtn.classList.toggle("hidden", window.scrollY < 350));
+    topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    const observer = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("show")), { threshold: 0.1 });
+    const cart = JSON.parse(localStorage.getItem("bbsEnquiryCart") || "[]");
+    document.getElementById("cartCount").textContent = cart.length;
+  </script>
+</body>
+</html>

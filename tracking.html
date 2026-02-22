@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Steel Order | Bababaisnath Steels Kanpur</title>
+  <meta name="description" content="Track RFQ and order dispatch status for Bababaisnath Steels orders in Kanpur and nearby districts.">
+  <meta property="og:title" content="Order Tracker - Bababaisnath Steels">
+  <meta property="og:description" content="Track Inquiry Received to Delivered status using your reference number.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/tracking.html">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#0F2557',accent:'#E8880A',success:'#16A34A',page:'#F8F8F6'}}}};</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-page">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 text-primary font-bold text-xl"><span class="text-accent">[#]</span>Bababaisnath Steels</a>
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculators</a><a href="quote.html">Quote</a><a href="tracking.html" class="text-accent">Track Order</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+      <button id="menuBtn" class="lg:hidden text-sm text-primary border px-3 py-1 rounded">Menu</button>
+    </div>
+    <aside id="mobileMenu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl translate-x-full transition-transform duration-300 z-50 p-6 lg:hidden">
+      <button id="closeMenu" class="mb-6 text-primary text-xl">X</button>
+      <div class="grid gap-4 font-semibold"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculators</a><a href="quote.html">Quote</a><a href="tracking.html">Track Order</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="blog.html">Blog</a></div>
+    </aside>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-extrabold text-primary reveal">Order Tracker</h1>
+    <p class="mt-2 reveal">Use demo references: <b>BBS-2024-001</b> and <b>BBS-2024-002</b></p>
+    <div class="card p-6 mt-6">
+      <div class="flex gap-2">
+        <input id="refInput" class="flex-1 border rounded px-4 py-3" placeholder="Enter order / RFQ reference number">
+        <button id="trackBtn" class="px-4 py-3 rounded bg-accent text-primary font-bold">Track</button>
+      </div>
+      <div id="result" class="mt-6 hidden">
+        <h2 class="text-xl font-bold text-primary mb-4">Status Timeline</h2>
+        <div id="steps" class="grid md:grid-cols-6 gap-3 text-center"></div>
+      </div>
+      <p id="trackMsg" class="mt-3 text-sm"></p>
+    </div>
+  </main>
+  <footer class="bg-slate-900 text-slate-200 mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8 text-sm">
+      <div><h3 class="font-bold text-white text-lg">Bababaisnath Steels</h3><p class="mt-2">Kanpur's B2B steel distribution partner.</p><p class="mt-2">GST: 09ABCDE1234F1Z8<br>MSME: UDYAM-UP-40-0012345</p></div>
+      <div><h3 class="font-bold text-white">Quick Links</h3><div class="grid gap-1 mt-2"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculators</a><a href="quote.html">Get Quote</a><a href="tracking.html">Track Order</a></div></div>
+      <div><h3 class="font-bold text-white">Categories</h3><p class="mt-2">TMT Bars, Pipes, Sheets, Plates, Angles, Channels, I-Beams.</p></div>
+      <div><h3 class="font-bold text-white">Contact</h3><p class="mt-2">Transport Nagar, Kanpur, UP<br>+91 98765 43210<br>sales@bababaisnathsteels.in</p></div>
+    </div>
+    <div class="border-t border-slate-700 py-3 text-center text-xs">(c) 2026 Bababaisnath Steels. Proudly serving Kanpur since 2004.</div>
+  </footer>
+  <a href="https://wa.me/919876543210" class="fixed bottom-24 right-4 z-40 bg-success text-white px-4 py-3 rounded-full whatsapp-pulse font-semibold">WhatsApp</a>
+  <button id="topBtn" class="fixed bottom-24 right-36 z-40 bg-primary text-white px-4 py-3 rounded-full hidden">Top</button>
+  <a href="quote.html" class="fixed bottom-24 left-4 z-40 bg-accent text-primary px-4 py-3 rounded-full font-bold">Enquiry Cart: <span id="cartCount">0</span></a>
+  <nav class="lg:hidden fixed bottom-0 inset-x-0 bg-white border-t grid grid-cols-5 text-xs font-semibold z-50"><a href="index.html" class="p-2 text-center">Home</a><a href="products.html" class="p-2 text-center">Products</a><a href="calculator.html" class="p-2 text-center">Calculator</a><a href="quote.html" class="p-2 text-center">Quote</a><a href="tel:+919876543210" class="p-2 text-center">Call</a></nav>
+  <script>
+    if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("sw.js")); }
+    const states = ["Inquiry Received","Quote Sent","Order Confirmed","Material Ready","Dispatched","Delivered"];
+    const db = {"BBS-2024-001":4,"BBS-2024-002":2};
+    document.getElementById("trackBtn").addEventListener("click", () => {
+      const ref = document.getElementById("refInput").value.trim().toUpperCase();
+      const msg = document.getElementById("trackMsg");
+      if (!(ref in db)) { msg.textContent = "Reference not found. Please verify number or call support."; msg.className="mt-3 text-sm text-red-600"; document.getElementById("result").classList.add("hidden"); return; }
+      msg.textContent = `Tracking ${ref}`; msg.className="mt-3 text-sm text-green-700";
+      const current = db[ref];
+      document.getElementById("steps").innerHTML = states.map((s,i)=>`<div class="p-3 rounded ${i<=current?'bg-green-50 border border-green-300':'bg-slate-100'}"><div class="step-dot mx-auto ${i<=current?'bg-success text-white':'bg-slate-300 text-slate-600'}">${i+1}</div><p class="mt-2 text-sm font-semibold">${s}</p></div>`).join("");
+      document.getElementById("result").classList.remove("hidden");
+    });
+    const menuBtn = document.getElementById("menuBtn"), closeMenu = document.getElementById("closeMenu"), mobileMenu = document.getElementById("mobileMenu");
+    menuBtn?.addEventListener("click", () => mobileMenu.classList.remove("translate-x-full"));
+    closeMenu?.addEventListener("click", () => mobileMenu.classList.add("translate-x-full"));
+    const topBtn = document.getElementById("topBtn");
+    window.addEventListener("scroll", () => topBtn.classList.toggle("hidden", window.scrollY < 350));
+    topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    const observer = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("show")), { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    document.getElementById("cartCount").textContent = JSON.parse(localStorage.getItem("bbsEnquiryCart") || "[]").length;
+  </script>
+</body>
+</html>

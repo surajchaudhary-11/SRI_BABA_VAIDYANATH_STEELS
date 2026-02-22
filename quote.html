@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Steel Quote in Kanpur | Bababaisnath Steels RFQ</title>
+  <meta name="description" content="Submit multi-product steel RFQ online with delivery date and quantity details. Fast quote response from Bababaisnath Steels, Kanpur.">
+  <meta property="og:title" content="Request Quote - Bababaisnath Steels">
+  <meta property="og:description" content="Raise RFQ for TMT bars, pipes, sheets and structural steel with delivery schedule.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/quote.html">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#0F2557',accent:'#E8880A',success:'#16A34A',page:'#F8F8F6'}}}};</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-page">
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 text-primary font-bold text-xl"><span class="text-accent">[#]</span>Bababaisnath Steels</a>
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculators</a><a href="quote.html" class="text-accent">Quote</a><a href="tracking.html">Track Order</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+      <div class="hidden lg:flex gap-2"><a href="https://wa.me/919876543210" class="px-4 py-2 rounded bg-success text-white text-sm font-semibold">WhatsApp</a><a href="tel:+919876543210" class="px-4 py-2 rounded border border-primary text-primary text-sm font-semibold">Call Now</a></div>
+      <button id="menuBtn" class="lg:hidden text-sm text-primary border px-3 py-1 rounded">Menu</button>
+    </div>
+    <aside id="mobileMenu" class="fixed inset-y-0 right-0 w-72 bg-white shadow-2xl translate-x-full transition-transform duration-300 z-50 p-6 lg:hidden"><button id="closeMenu" class="mb-6 text-primary text-xl">X</button><div class="grid gap-4 font-semibold"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculators</a><a href="quote.html">Quote</a><a href="tracking.html">Track Order</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="blog.html">Blog</a></div></aside>
+  </header>
+
+  <section class="industrial-hero text-white">
+    <div class="max-w-7xl mx-auto px-4 py-14">
+      <h1 class="text-4xl font-extrabold reveal">RFQ / Quote Request</h1>
+      <p class="mt-3 reveal">Complete this 3-step form for a commercial quotation with delivery timeline.</p>
+    </div>
+  </section>
+
+  <main class="max-w-5xl mx-auto px-4 py-10">
+    <div class="bg-slate-200 h-2 rounded overflow-hidden"><div id="progressBar" class="h-2 bg-accent w-1/3 transition-all"></div></div>
+    <form id="rfqForm" class="card p-6 mt-5">
+      <section class="step">
+        <h2 class="text-2xl font-bold text-primary">Step 1: Personal Details</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <input required name="name" class="border rounded px-3 py-3" placeholder="Name">
+          <input required name="company" class="border rounded px-3 py-3" placeholder="Company">
+          <input required name="phone" pattern="[0-9]{10}" class="border rounded px-3 py-3" placeholder="Phone (10 digits)">
+          <input required type="email" name="email" class="border rounded px-3 py-3" placeholder="Email">
+          <input required name="city" class="border rounded px-3 py-3" placeholder="City">
+          <input required id="pincode" name="pincode" pattern="[0-9]{6}" class="border rounded px-3 py-3" placeholder="Pincode">
+        </div>
+        <div class="mt-4 flex gap-2">
+          <button type="button" id="checkPin" class="px-4 py-2 rounded border border-primary text-primary font-semibold">Check Delivery Area</button>
+          <p id="pinStatus" class="self-center text-sm"></p>
+        </div>
+      </section>
+
+      <section class="step hidden">
+        <h2 class="text-2xl font-bold text-primary">Step 2: Product Requirements</h2>
+        <div id="rowsWrap" class="mt-4 grid gap-3"></div>
+        <button type="button" id="addRow" class="mt-3 px-4 py-2 rounded bg-primary text-white">+ Add Product Row</button>
+      </section>
+
+      <section class="step hidden">
+        <h2 class="text-2xl font-bold text-primary">Step 3: Review & Submit</h2>
+        <div id="review" class="mt-4 p-4 bg-slate-100 rounded text-sm"></div>
+      </section>
+
+      <div class="flex justify-between mt-6">
+        <button type="button" id="prevBtn" class="px-4 py-2 rounded border border-primary text-primary hidden">Previous</button>
+        <button type="button" id="nextBtn" class="px-4 py-2 rounded bg-accent text-primary font-bold">Next</button>
+        <button type="submit" id="submitBtn" class="px-4 py-2 rounded bg-success text-white font-bold hidden">Submit RFQ</button>
+      </div>
+      <p id="formError" class="text-red-600 text-sm mt-3"></p>
+    </form>
+
+    <div id="confirmBox" class="card p-6 mt-6 hidden">
+      <h3 class="text-2xl font-bold text-success">RFQ Submitted Successfully</h3>
+      <p class="mt-3">Reference Number: <b id="rfqRef"></b></p>
+      <p class="mt-1">Our sales team will contact you shortly with pricing and dispatch options.</p>
+    </div>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-200 mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8 text-sm">
+      <div><h3 class="font-bold text-white text-lg">Bababaisnath Steels</h3><p class="mt-2">Kanpur's B2B steel distribution partner.</p><p class="mt-2">GST: 09ABCDE1234F1Z8<br>MSME: UDYAM-UP-40-0012345</p></div>
+      <div><h3 class="font-bold text-white">Quick Links</h3><div class="grid gap-1 mt-2"><a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculators</a><a href="quote.html">Get Quote</a><a href="tracking.html">Track Order</a></div></div>
+      <div><h3 class="font-bold text-white">Categories</h3><p class="mt-2">TMT Bars, Pipes, Sheets, Plates, Angles, Channels, I-Beams.</p></div>
+      <div><h3 class="font-bold text-white">Contact</h3><p class="mt-2">Transport Nagar, Kanpur, UP<br>+91 98765 43210<br>sales@bababaisnathsteels.in</p></div>
+    </div>
+    <div class="border-t border-slate-700 py-3 text-center text-xs">(c) 2026 Bababaisnath Steels. Proudly serving Kanpur since 2004.</div>
+  </footer>
+
+  <a href="https://wa.me/919876543210" class="fixed bottom-24 right-4 z-40 bg-success text-white px-4 py-3 rounded-full whatsapp-pulse font-semibold">WhatsApp</a>
+  <button id="topBtn" class="fixed bottom-24 right-36 z-40 bg-primary text-white px-4 py-3 rounded-full hidden">Top</button>
+  <a href="quote.html" class="fixed bottom-24 left-4 z-40 bg-accent text-primary px-4 py-3 rounded-full font-bold">Enquiry Cart: <span id="cartCount">0</span></a>
+  <nav class="lg:hidden fixed bottom-0 inset-x-0 bg-white border-t grid grid-cols-5 text-xs font-semibold z-50"><a href="index.html" class="p-2 text-center">Home</a><a href="products.html" class="p-2 text-center">Products</a><a href="calculator.html" class="p-2 text-center">Calculator</a><a href="quote.html" class="p-2 text-center">Quote</a><a href="tel:+919876543210" class="p-2 text-center">Call</a></nav>
+
+  <script>
+    if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("sw.js")); }
+    const steps = document.querySelectorAll(".step"), progressBar = document.getElementById("progressBar"), prevBtn = document.getElementById("prevBtn"), nextBtn = document.getElementById("nextBtn"), submitBtn = document.getElementById("submitBtn"), form = document.getElementById("rfqForm"), review = document.getElementById("review"), formError = document.getElementById("formError");
+    let step = 0;
+    function rowHtml() {
+      return `<div class="grid md:grid-cols-5 gap-2 reqRow">
+        <select class="border rounded px-2 py-2" required><option>TMT Bars</option><option>MS Pipes</option><option>GI Pipes</option><option>HR Sheets</option><option>CR Sheets</option><option>MS Plates</option><option>Angles</option><option>Channels</option><option>I-Beams</option><option>Flat Bars</option><option>Binding Wire</option><option>Roofing Sheets</option></select>
+        <input class="border rounded px-2 py-2" placeholder="Grade" required>
+        <input class="border rounded px-2 py-2" placeholder="Size" required>
+        <input type="number" class="border rounded px-2 py-2" placeholder="Qty (MT)" required>
+        <input type="date" class="border rounded px-2 py-2" required>
+      </div>`;
+    }
+    const rowsWrap = document.getElementById("rowsWrap");
+    rowsWrap.innerHTML = rowHtml();
+    document.getElementById("addRow").addEventListener("click", () => rowsWrap.insertAdjacentHTML("beforeend", rowHtml()));
+    function validateStep() {
+      formError.textContent = "";
+      const current = steps[step].querySelectorAll("input,select");
+      for (const field of current) {
+        if (!field.checkValidity()) { formError.textContent = "Please complete all required fields correctly."; return false; }
+      }
+      return true;
+    }
+    function showStep() {
+      steps.forEach((s, i) => s.classList.toggle("hidden", i !== step));
+      progressBar.style.width = ((step + 1) * 33.33) + "%";
+      prevBtn.classList.toggle("hidden", step === 0);
+      nextBtn.classList.toggle("hidden", step === 2);
+      submitBtn.classList.toggle("hidden", step !== 2);
+      if (step === 2) {
+        const fd = new FormData(form);
+        let html = `<p><b>Name:</b> ${fd.get("name")} | <b>Company:</b> ${fd.get("company")}</p><p><b>Phone:</b> ${fd.get("phone")} | <b>Email:</b> ${fd.get("email")}</p><p><b>City:</b> ${fd.get("city")} - ${fd.get("pincode")}</p><hr class="my-2">`;
+        document.querySelectorAll(".reqRow").forEach((row, idx) => {
+          const f = row.querySelectorAll("select,input");
+          html += `<p>${idx+1}. <b>${f[0].value}</b> | ${f[1].value} | ${f[2].value} | ${f[3].value} MT | ${f[4].value}</p>`;
+        });
+        review.innerHTML = html;
+      }
+    }
+    nextBtn.addEventListener("click", () => { if (validateStep()) { step++; showStep(); } });
+    prevBtn.addEventListener("click", () => { step--; showStep(); });
+    document.getElementById("checkPin").addEventListener("click", () => {
+      const serviceable = ["208001","208002","208003","208004","208005","208006","208007","208008","208009","208010","208011","208012"];
+      const pin = document.getElementById("pincode").value;
+      const msg = document.getElementById("pinStatus");
+      if (serviceable.includes(pin)) { msg.textContent = "Serviceable: Delivery available"; msg.className = "self-center text-sm text-green-700"; }
+      else { msg.textContent = "Limited: Contact sales for route confirmation"; msg.className = "self-center text-sm text-amber-700"; }
+    });
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!validateStep()) return;
+      const year = new Date().getFullYear();
+      const ref = `RFQ-${year}-${Math.floor(1000 + Math.random()*9000)}`;
+      document.getElementById("rfqRef").textContent = ref;
+      form.classList.add("hidden");
+      document.getElementById("confirmBox").classList.remove("hidden");
+    });
+    showStep();
+    const menuBtn = document.getElementById("menuBtn"), closeMenu = document.getElementById("closeMenu"), mobileMenu = document.getElementById("mobileMenu");
+    menuBtn?.addEventListener("click", () => mobileMenu.classList.remove("translate-x-full"));
+    closeMenu?.addEventListener("click", () => mobileMenu.classList.add("translate-x-full"));
+    const topBtn = document.getElementById("topBtn");
+    window.addEventListener("scroll", () => topBtn.classList.toggle("hidden", window.scrollY < 350));
+    topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    const observer = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("show")), { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    document.getElementById("cartCount").textContent = JSON.parse(localStorage.getItem("bbsEnquiryCart") || "[]").length;
+  </script>
+</body>
+</html>
