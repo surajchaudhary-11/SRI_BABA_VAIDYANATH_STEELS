@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { COMPANY_NAME, PHONE_SALES, WHATSAPP } from "@/lib/constants";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
   ["/", "Home"],
@@ -27,7 +26,6 @@ export default function Nav() {
           ))}
         </nav>
         <div className="hidden gap-2 md:flex">
-          <ThemeToggle />
           <a href={`https://wa.me/${WHATSAPP}`} className="btn-secondary px-4 py-2 text-xs uppercase tracking-[0.2em]">WhatsApp</a>
           <a href={`tel:${PHONE_SALES}`} className="btn-secondary px-4 py-2 text-xs uppercase tracking-[0.2em]">Call Now</a>
         </div>
@@ -37,9 +35,6 @@ export default function Nav() {
         {open && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-black/95 p-8">
             <button onClick={() => setOpen(false)} className="mb-8 uppercase tracking-[0.2em] text-white/70">Close</button>
-            <div className="mb-6">
-              <ThemeToggle />
-            </div>
             <div className="grid gap-4">
               {links.map(([href, label], i) => (
                 <motion.div key={href} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}>

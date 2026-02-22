@@ -10,7 +10,10 @@ export function GET() {
       background_color: "#080808",
       theme_color: "#080808",
       description: "Premium industrial steel distributor in Kanpur.",
-      icons: [{ src: "/icon-192.svg", sizes: "192x192", type: "image/svg+xml" }]
+      icons: [
+        { src: "/browser.png", sizes: "192x192", type: "image/png" },
+        { src: "/browser.png", sizes: "512x512", type: "image/png" }
+      ]
     },
     { headers: { "Content-Type": "application/manifest+json" } }
   );

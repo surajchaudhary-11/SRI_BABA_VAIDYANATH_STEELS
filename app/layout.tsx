@@ -17,7 +17,12 @@ const condensed = Barlow_Condensed({ subsets: ["latin"], weight: ["300", "400", 
 export const metadata: Metadata = {
   title: "Bababaisnath Steels",
   description: "Premium steel distributor in Kanpur.",
-  manifest: "/manifest.webmanifest"
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/browser.png",
+    shortcut: "/browser.png",
+    apple: "/browser.png"
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
